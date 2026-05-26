@@ -9,9 +9,9 @@ predict_lotto.py
     לא כי הן מנצחות, אלא כי הן מעניינות לנתח.
 
 שימוש:
-    python predict_lotto.py                  # כל האסטרטגיות
-    python predict_lotto.py --strategy hot   # רק "מספרים חמים"
-    python predict_lotto.py --runs 10        # 10 הגרלות מדומות
+    python3 predict_lotto.py                  # כל האסטרטגיות
+    python3 predict_lotto.py --strategy hot   # רק "מספרים חמים"
+    python3 predict_lotto.py --runs 10        # 10 הגרלות מדומות
 """
 
 import argparse

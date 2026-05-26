@@ -5,7 +5,7 @@ seed_mock.py
 ללא גישה לאינטרנט.
 
 שימוש:
-    python seed_mock.py
+    python3 seed_mock.py
 """
 
 import random

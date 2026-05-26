@@ -4,10 +4,10 @@ analyze_lotto.py
 ניתוח סטטיסטי של תוצאות הלוטו שנשמרו ב-SQLite.
 
 שימוש:
-    python analyze_lotto.py                   # דוח מלא
-    python analyze_lotto.py --top 10          # 10 המספרים הנפוצים ביותר
-    python analyze_lotto.py --heatmap         # מטריצת שכיחות זוגות
-    python analyze_lotto.py --since 2023-01-01
+    python3 analyze_lotto.py                   # דוח מלא
+    python3 analyze_lotto.py --top 10          # 10 המספרים הנפוצים ביותר
+    python3 analyze_lotto.py --heatmap         # מטריצת שכיחות זוגות
+    python3 analyze_lotto.py --since 2023-01-01
 """
 
 import argparse

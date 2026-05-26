@@ -4,8 +4,8 @@ fetch_lotto.py
 מוריד את עדכון ה-RSS של הלוטו מאתר פאיס ושומר את התוצאות ב-SQLite.
 
 שימוש:
-    python fetch_lotto.py              # טעינה ושמירה
-    python fetch_lotto.py --dry-run    # הדפסה בלבד ללא שמירה
+    python3 fetch_lotto.py              # טעינה ושמירה
+    python3 fetch_lotto.py --dry-run    # הדפסה בלבד ללא שמירה
 """
 
 import argparse

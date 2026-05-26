@@ -27,7 +27,7 @@ git clone https://github.com/yuval2508/yuval2508.git
 cd yuval2508/lotto_israel
 
 # 2. צור סביבה וירטואלית (מומלץ)
-python -m venv .venv
+python3 -m venv .venv
 
 # Windows:
 .venv\Scripts\activate
@@ -44,13 +44,13 @@ pip install -r requirements.txt
 
 ```bash
 # הורד תוצאות אמיתיות מפאיס ושמור ב-DB
-python fetch_lotto.py
+python3 fetch_lotto.py
 
 # בדיקה ללא שמירה
-python fetch_lotto.py --dry-run
+python3 fetch_lotto.py --dry-run
 
 # אין אינטרנט? צור 200 הגרלות מדומות לבדיקה
-python seed_mock.py
+python3 seed_mock.py
 ```
 
 ---
@@ -61,26 +61,26 @@ python seed_mock.py
 
 ```bash
 # דוח מלא
-python analyze_lotto.py
+python3 analyze_lotto.py
 
 # 10 המספרים הנפוצים ביותר
-python analyze_lotto.py --top 10
+python3 analyze_lotto.py --top 10
 
 # ניתוח מתאריך מסוים + ניתוח זוגות
-python analyze_lotto.py --since 2023-01-01 --pairs
+python3 analyze_lotto.py --since 2023-01-01 --pairs
 ```
 
 ### גרפים ויזואליים (matplotlib)
 
 ```bash
 # שמור כל הגרפים לתיקיית charts/
-python visualize_lotto.py
+python3 visualize_lotto.py
 
 # פתח גרפים ישירות במסך
-python visualize_lotto.py --show
+python3 visualize_lotto.py --show
 
 # גרפים מתאריך מסוים
-python visualize_lotto.py --since 2023-01-01
+python3 visualize_lotto.py --since 2023-01-01
 ```
 
 גרפים שנוצרים:
@@ -96,10 +96,10 @@ python visualize_lotto.py --since 2023-01-01
 
 ```bash
 # כל האסטרטגיות, 3 הצעות כל אחת
-python predict_lotto.py --runs 3
+python3 predict_lotto.py --runs 3
 
 # אסטרטגיה ספציפית + הערכה רטרואקטיבית
-python predict_lotto.py --strategy ensemble --eval
+python3 predict_lotto.py --strategy ensemble --eval
 
 # אסטרטגיות זמינות: uniform | hot | cold | balanced | due | ml_ema | ensemble
 ```
@@ -109,7 +109,7 @@ python predict_lotto.py --strategy ensemble --eval
 ## 🌐 שלב 3 – ממשק Web
 
 ```bash
-python web_app.py
+python3 web_app.py
 ```
 
 פתח בדפדפן: **http://localhost:5000**
@@ -143,22 +143,22 @@ Dashboard כולל:
 
 ```bash
 # מריץ תהליך Python שמחכה לזמן הנכון
-python scheduler.py
+python3 scheduler.py
 
 # הרץ עכשיו פעם אחת
-python scheduler.py --now
+python3 scheduler.py --now
 ```
 
 ### Cron (Mac / Linux)
 
 ```bash
 # הצג את שורת ה-cron המוכנה
-python scheduler.py --cron
+python3 scheduler.py --cron
 
 # או הוסף ידנית (ערוך את הנתיב לפי המיקום שלך)
 crontab -e
 # הוסף:
-0 22 * * 2,5  /path/to/.venv/bin/python /path/to/lotto_israel/fetch_lotto.py >> ~/lotto.log 2>&1
+0 22 * * 2,5  /path/to/.venv/bin/python3 /path/to/lotto_israel/fetch_lotto.py >> ~/lotto.log 2>&1
 ```
 
 ### Windows Task Scheduler
@@ -175,7 +175,7 @@ Register-ScheduledTask -TaskName "LottoFetch" -Action $action -Trigger $trigger
 
 ```bash
 # הצג קבצי service ו-timer מוכנים
-python scheduler.py --cron
+python3 scheduler.py --cron
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now lotto-fetch.timer

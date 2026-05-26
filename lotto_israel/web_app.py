@@ -4,9 +4,9 @@ web_app.py
 ממשק Web לניתוח תוצאות הלוטו — Flask + Bootstrap 5.
 
 שימוש:
-    python web_app.py               # http://localhost:5000
-    python web_app.py --port 8080
-    python web_app.py --debug
+    python3 web_app.py               # http://localhost:5000
+    python3 web_app.py --port 8080
+    python3 web_app.py --debug
 """
 
 import argparse

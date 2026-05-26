@@ -4,9 +4,9 @@ visualize_lotto.py
 גרפים ויזואליים של תוצאות הלוטו באמצעות matplotlib.
 
 שימוש:
-    python visualize_lotto.py                     # שמירת כל הגרפים לתיקיית charts/
-    python visualize_lotto.py --show              # פתיחה ישירה במסך
-    python visualize_lotto.py --since 2023-01-01
+    python3 visualize_lotto.py                     # שמירת כל הגרפים לתיקיית charts/
+    python3 visualize_lotto.py --show              # פתיחה ישירה במסך
+    python3 visualize_lotto.py --since 2023-01-01
 """
 
 import argparse

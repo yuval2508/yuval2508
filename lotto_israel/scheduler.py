@@ -9,9 +9,9 @@ scheduler.py
   (התוצאות מתפרסמות באתר כ-30-60 דקות לאחר מכן)
 
 שימוש:
-    python scheduler.py              # מריץ scheduler רציף (blocking)
-    python scheduler.py --now        # מריץ פעם אחת עכשיו ויוצא
-    python scheduler.py --cron       # מדפיס הוראת crontab ויוצא
+    python3 scheduler.py              # מריץ scheduler רציף (blocking)
+    python3 scheduler.py --now        # מריץ פעם אחת עכשיו ויוצא
+    python3 scheduler.py --cron       # מדפיס הוראת crontab ויוצא
 """
 
 import argparse
@@ -116,7 +116,7 @@ def start_scheduler():
         log.error(
             "APScheduler לא מותקן.\n"
             "הרץ:  pip install apscheduler\n"
-            "או השתמש ב:  python scheduler.py --cron"
+            "או השתמש ב:  python3 scheduler.py --cron"
         )
         sys.exit(1)
 
