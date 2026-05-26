@@ -6,32 +6,58 @@
 
 ```
 lotto_israel/
-├── fetch_lotto.py    # הורדה + פירסור RSS + שמירה ב-DB
-├── analyze_lotto.py  # ניתוח סטטיסטי
-├── seed_mock.py      # נתוני דוגמה (ללא אינטרנט)
+├── fetch_lotto.py      # הורדה + פירסור RSS + שמירה ב-DB
+├── analyze_lotto.py    # ניתוח סטטיסטי (טקסט/ASCII)
+├── visualize_lotto.py  # גרפים ויזואליים (matplotlib)
+├── predict_lotto.py    # הצעות מספרים – 6 אסטרטגיות
+├── web_app.py          # ממשק Web – Flask dashboard
+├── scheduler.py        # הרצה אוטומטית (APScheduler / cron / systemd)
+├── seed_mock.py        # נתוני דוגמה (ללא אינטרנט)
 ├── requirements.txt
-└── lotto.db          # נוצר אוטומטית
+└── lotto.db            # נוצר אוטומטית
 ```
 
-## התקנה
+---
+
+## 🚀 התקנה מהירה
 
 ```bash
+# 1. שכפל את ה-repo
+git clone https://github.com/yuval2508/yuval2508.git
+cd yuval2508/lotto_israel
+
+# 2. צור סביבה וירטואלית (מומלץ)
+python -m venv .venv
+
+# Windows:
+.venv\Scripts\activate
+# Mac / Linux:
+source .venv/bin/activate
+
+# 3. התקן תלויות
 pip install -r requirements.txt
 ```
 
-## שימוש
+---
 
-### 1. הורדה ושמירה
+## 📥 שלב 1 – הורד נתונים
 
 ```bash
-# הורד ושמור
+# הורד תוצאות אמיתיות מפאיס ושמור ב-DB
 python fetch_lotto.py
 
 # בדיקה ללא שמירה
 python fetch_lotto.py --dry-run
+
+# אין אינטרנט? צור 200 הגרלות מדומות לבדיקה
+python seed_mock.py
 ```
 
-### 2. ניתוח סטטיסטי
+---
+
+## 📊 שלב 2 – ניתוח
+
+### ניתוח טקסטואלי (טרמינל)
 
 ```bash
 # דוח מלא
@@ -40,18 +66,125 @@ python analyze_lotto.py
 # 10 המספרים הנפוצים ביותר
 python analyze_lotto.py --top 10
 
-# ניתוח מתאריך מסוים + זוגות
+# ניתוח מתאריך מסוים + ניתוח זוגות
 python analyze_lotto.py --since 2023-01-01 --pairs
 ```
 
-### 3. נתוני דוגמה (ללא אינטרנט)
+### גרפים ויזואליים (matplotlib)
 
 ```bash
-python seed_mock.py
-python analyze_lotto.py
+# שמור כל הגרפים לתיקיית charts/
+python visualize_lotto.py
+
+# פתח גרפים ישירות במסך
+python visualize_lotto.py --show
+
+# גרפים מתאריך מסוים
+python visualize_lotto.py --since 2023-01-01
 ```
 
-## מסד הנתונים
+גרפים שנוצרים:
+| קובץ | תיאור |
+|------|--------|
+| `charts/frequency.png` | שכיחות כל מספר (1-49) |
+| `charts/heatmap.png` | מטריצת זוגות נפוצים |
+| `charts/sum_dist.png` | התפלגות סכום 6 המספרים |
+| `charts/timeline.png` | קו זמן של מספרים חמים |
+| `charts/strong.png` | שכיחות המספר החזק |
+
+### הצעות מספרים (ML סטטיסטי)
+
+```bash
+# כל האסטרטגיות, 3 הצעות כל אחת
+python predict_lotto.py --runs 3
+
+# אסטרטגיה ספציפית + הערכה רטרואקטיבית
+python predict_lotto.py --strategy ensemble --eval
+
+# אסטרטגיות זמינות: uniform | hot | cold | balanced | due | ml_ema | ensemble
+```
+
+---
+
+## 🌐 שלב 3 – ממשק Web
+
+```bash
+python web_app.py
+```
+
+פתח בדפדפן: **http://localhost:5000**
+
+Dashboard כולל:
+- סטטיסטיקות כלליות + מספרים חמים/קרים
+- גרפים מוטמעים
+- טבלת 10 הגרלות אחרונות
+- הצעות מספרים לפי אסטרטגיות
+
+### API Endpoints
+
+| Endpoint | תיאור |
+|----------|--------|
+| `GET /api/draws` | כל ההגרלות (JSON) |
+| `GET /api/stats` | סטטיסטיקות כלליות |
+| `GET /api/suggest/hot` | הצעה – מספרים חמים |
+| `GET /api/suggest/cold` | הצעה – מספרים קרים |
+| `GET /api/suggest/ensemble` | הצעה – אנסמבל |
+| `GET /chart/frequency` | גרף שכיחות (PNG) |
+| `GET /chart/heatmap` | מטריצת זוגות (PNG) |
+
+---
+
+## ⏰ שלב 4 – הרצה אוטומטית
+
+הלוטו מתקיים בדרך כלל בימי **שלישי ושישי** בשעה 21:00.
+הסקריפט ירוץ ב-22:00 (אחרי פרסום התוצאות).
+
+### APScheduler (Python – Windows / Mac / Linux)
+
+```bash
+# מריץ תהליך Python שמחכה לזמן הנכון
+python scheduler.py
+
+# הרץ עכשיו פעם אחת
+python scheduler.py --now
+```
+
+### Cron (Mac / Linux)
+
+```bash
+# הצג את שורת ה-cron המוכנה
+python scheduler.py --cron
+
+# או הוסף ידנית (ערוך את הנתיב לפי המיקום שלך)
+crontab -e
+# הוסף:
+0 22 * * 2,5  /path/to/.venv/bin/python /path/to/lotto_israel/fetch_lotto.py >> ~/lotto.log 2>&1
+```
+
+### Windows Task Scheduler
+
+```powershell
+# צור משימה מתוזמנת (PowerShell כ-Admin)
+$action  = New-ScheduledTaskAction -Execute "C:\path\to\.venv\Scripts\python.exe" `
+                                   -Argument "C:\path\to\lotto_israel\fetch_lotto.py"
+$trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Tuesday,Friday -At 10:00PM
+Register-ScheduledTask -TaskName "LottoFetch" -Action $action -Trigger $trigger
+```
+
+### systemd (Linux – הדרך המומלצת לשרת)
+
+```bash
+# הצג קבצי service ו-timer מוכנים
+python scheduler.py --cron
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now lotto-fetch.timer
+systemctl list-timers lotto-fetch.timer   # בדוק שהטיימר פעיל
+```
+
+---
+
+## 🗄️ מסד הנתונים
 
 ### טבלת `draws`
 
@@ -69,24 +202,29 @@ python analyze_lotto.py
 | עמודה | סוג | תיאור |
 |-------|-----|--------|
 | `draw_number` | INTEGER | מספר הגרלה |
-| `rank` | INTEGER | דרגת הפרס |
+| `rank` | INTEGER | דרגת הפרס (1=ראשון) |
 | `winners` | INTEGER | מספר זוכים |
 | `prize_ils` | REAL | סכום הפרס בש"ח |
 
-## ניתוחים זמינים
+### שאילתות SQL שימושיות
 
-- 📊 **שכיחות מספרים** – אילו מספרים הופיעו הכי הרבה
-- 🔥 **מספרים חמים / קרים** – הנפוצים והנדירים ביותר
-- 👫 **ניתוח זוגות** – אילו זוגות מספרים "אוהבים" להופיע ביחד
-- ⚖️ **יחס זוגי/אי-זוגי**
-- ➕ **התפלגות סכומים**
-- 🔢 **מספרים עוקבים**
-- 📦 **התפלגות עשורים** (1-10, 11-20, ...)
-- 💪 **שכיחות המספר החזק**
+```sql
+-- 10 הגרלות אחרונות
+SELECT * FROM draws ORDER BY draw_date DESC LIMIT 10;
 
-## הרצה אוטומטית (Cron)
+-- המספרים הנפוצים ביותר
+SELECT num, COUNT(*) AS cnt FROM (
+  SELECT n1 AS num FROM draws UNION ALL
+  SELECT n2 FROM draws UNION ALL
+  SELECT n3 FROM draws UNION ALL
+  SELECT n4 FROM draws UNION ALL
+  SELECT n5 FROM draws UNION ALL
+  SELECT n6 FROM draws
+) GROUP BY num ORDER BY cnt DESC;
 
-```bash
-# כל יום שלישי ורביעי בשעה 22:30
-30 22 * * 2,3 cd /path/to/project && python fetch_lotto.py >> lotto.log 2>&1
+-- הגרלות שבהן הופיע מספר 7
+SELECT draw_number, draw_date, n1,n2,n3,n4,n5,n6
+FROM draws
+WHERE 7 IN (n1,n2,n3,n4,n5,n6)
+ORDER BY draw_date DESC;
 ```
