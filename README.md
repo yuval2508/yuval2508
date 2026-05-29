@@ -1,3 +1,11 @@
-# Welcome 👋
+<div align="center">
 
-IT Consulting & Development — [SIMPLiT Consulting](https://simplit.co.il)
+<br>
+
+# SIMPLiT Consultings
+
+`IT · Development · Cloud`
+
+<br>
+
+</div>
