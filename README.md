@@ -4,7 +4,7 @@
 
 # SIMPLiT Consultings
 
-`IT · Development · Cloud · Automation · AI`
+`IT · InfoSec · Development · Cloud · Automation · AI`
 
 <br>
 
