@@ -2,15 +2,14 @@
 
 <br>
 
-## SIMPLiT Consulting
+## [SIMPLiT Consulting](https://simplit.co.il)
 
-`IT · InfoSec · Development · Cloud · Automation · AI Research`
-
-<br>
+`IT · Cyber Security · Development · Cloud · Automation · AI Research`
 
 <br>
 
-## ESEC
+
+## [ESEC](https://esec.co.il)
 
 `Cyber Security Advisory · Regulation Compliance · Audit · CISOaaS · News Channel`
 
