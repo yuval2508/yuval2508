@@ -1,5 +1,6 @@
 <div align="center">
 
+## Welcome to my codespace repositories
 <br>
 
 ### [SIMPLiT Consulting](https://simplit.co.il)
@@ -10,7 +11,7 @@
 
 ### [ESEC](https://esec.co.il)
 
-`Cyber Security Research  · News Channel`
+`Cyber Security Research  · Cyber News Channel`
 
 <br>
 
