@@ -11,7 +11,7 @@
 
 ### [ESEC](https://esec.co.il)
 
-`Cyber Security Research  · Cyber News Channel`
+`Cyber Security Research · Cyber News Channel`
 
 <br>
 
